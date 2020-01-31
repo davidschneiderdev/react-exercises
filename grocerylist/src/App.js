@@ -1,19 +1,17 @@
 import React from 'react';
+import GroceryList from './GroceryList';
 // import logo from './logo.svg';
 import './App.css';
 
 function App() {
 
   return (
-    <div>
-      <h1>Grocery List</h1>
-      <ol>
-        <li>Bread</li>
-        <li>Butter</li>
-        <li>Beer</li>
-      </ol>
+    <div className="App">
+      <GroceryList />
     </div>
   )
+
+  
   // return (
   //   <div className="App">
   //     <header className="App-header">
