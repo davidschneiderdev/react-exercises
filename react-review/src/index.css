@@ -1,0 +1,21 @@
+body {
+  background: white;
+}
+
+.card {
+  border: 2px solid gold;
+  border-radius: 15px;
+  padding: 8px 14px;
+}
+
+.card + .card {
+  margin-top: 50px;
+}
+
+.greet {
+  color: #777;
+}
+
+.greet h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
