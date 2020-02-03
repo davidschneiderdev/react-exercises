@@ -1,13 +1,24 @@
 import React from 'react';
 
+Greet.defaultProps = {
+    color: 'green'
+}
+
 function Greet({
     whom, 
-    how}) {
+    how,
+    color
+}) {
     return (
-        <div className="card greet">
+        <div 
+            style={{
+                color
+            }}
+            className="card greet">
             <h1>{how}, {whom}.</h1>
         </div>
     );
 }
+
 
 export default Greet;
