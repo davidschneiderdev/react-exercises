@@ -4,36 +4,52 @@ import './App.css';
 import Greet from './Greet';
 import Counter from './Counter';
 
-function App() {
-  return (
-    <div>
-      <Counter 
-        initialValue={10}
-        changeBy={2}
+// I want to move the state of the counters in the App.
+// I have to "lift state up" so that the counters can share state.abs
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      values: [
+        10,
+        99
+      ]
+    }
+  }
+  
+  render() {
+    return (
+      <div>
+        <Counter 
+          value={this.state.values[0]}
+          changeBy={2}
+          clickHandler={this._updateValue}
+          index={0}
+          />
+        <Counter 
+          value={this.state.values[1]}
+          changeBy={33}
+          clickHandler={this._updateValue}
+          index={1}
         />
-      <Counter 
-        initialValue={99}
-        changeBy={33}
-      />
-      <Counter 
-        initialValue={25}
-        changeBy={8}
-      />
-      <Greet 
-        whom="Cthulu"
-        how="Salutations"
-      />
-      <Greet 
-        whom="Partner"
-        how="Howdy"
-      />
-      <Greet 
-        whom="Mattie"
-        how="Ahoy"
-        // color="blue"
-      />
-    </div>
-  );
+      </div>
+    );
+  }
+
+  _updateValue = (index, newValue) => {
+    // make a copy of the current values array
+    const newValues = [
+      ...this.state.values
+    ];
+    // modify the copy
+    newValues[index] = newValue;
+
+    // update state with the new copy
+    this.setState({
+      values: newValues
+    });
+  }
 }
 
 export default App;
