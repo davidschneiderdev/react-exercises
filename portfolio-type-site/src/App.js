@@ -1,24 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Nav from './Nav';
+import Header from './Header';
+import Footer from './Footer';
+import ParagraphText from './ParagraphText';
+
+
+const headerTitle = `Amazing Web Developer`;
+
+const copy = `Lorem ipsum dolor sit amet consectetur adipisicing elit. A architecto optio necessitatibus, ipsam earum dignissimos iusto sit alias debitis. Distinctio corrupti, mollitia dignissimos quisquam totam possimus voluptatum accusamus facere molestiae!`;
+
+const linkNames = [
+  'Home',
+  'Portfolio',
+  'Contact'
+];
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-fluid">
+      <Header 
+        title={headerTitle}
+      />
+      <Nav 
+        links={linkNames}
+      />
+      <ParagraphText 
+        content={copy}
+      />
+      <Footer />
     </div>
   );
 }
