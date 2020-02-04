@@ -20,12 +20,12 @@ const linkNames = [
 
 function App() {
   return (
-    <div>
-      <Nav 
-        links={linkNames}
-      />
+    <div className="container-fluid">
       <Header 
         title={headerTitle}
+      />
+      <Nav 
+        links={linkNames}
       />
       <ParagraphText 
         content={copy}
