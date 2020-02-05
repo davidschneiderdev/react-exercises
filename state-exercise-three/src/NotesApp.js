@@ -10,7 +10,7 @@ class NotesApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchText: 'this is the search text',
+            searchText: '',
             notes: [
                 {
                     id: 'a1b2c3',
@@ -36,21 +36,36 @@ class NotesApp extends React.Component {
         return(
             <div>
                 <h1>Best Notes App Ever</h1>
-                <NotesList 
-                    notes={this.state.notes}
-                    handleClick={this._selectNote}
-                />
                 <NewNote />
-                <br />
-                <br />
-                <NoteEditor />
-                <br />
-                <br />
                 <SearchBar 
                     handleChange={this._setSearchText}
                     text={this.state.searchText} />
+                <NotesList 
+                    notes={this._getFilteredNotes()}
+                    handleClick={this._selectNote}
+                />
+                <br />
+                <NoteEditor 
+                    noteContent={this._getContentById()}
+                    updateNoteContent={this._updateNoteContent}
+                    updateNoteTitle={this._updateNoteTitle}
+                />
+                <br />
             </div>
         );
+    }
+
+    _getFilteredNotes = () => {
+        const filteredArray = this.state.notes.filter(note => {
+
+            const titleDoesMatch = note.title.toLowerCase().includes(this.state.searchText);
+            const copyDoesMatch = note.copy.toLowerCase().includes(this.state.searchText);
+
+            return titleDoesMatch || copyDoesMatch;
+
+        });
+        // console.log(filteredArray);
+        return filteredArray;
     }
 
     _setSearchText = (searchText) => {
@@ -65,9 +80,41 @@ class NotesApp extends React.Component {
         this.setState({
             currentNoteId
         }, () => {
-            console.log('updated current id');
+            console.log(`updated current ${this.state.currentNoteId}`);
         })
     }
+
+    _getContentById = () => {
+        const filteredArray = this.state.notes.filter(note => {
+
+            const idDoesMatch = note.id.includes(this.state.currentNoteId);
+            return idDoesMatch 
+
+        });
+        return [filteredArray[0].id, filteredArray[0].title,filteredArray[0].copy ];
+    }
+
+    _updateNoteTitle = (newTitle, noteId) => {
+        const arrayCopy = [...this.state.notes];
+        // console.log(arrayCopy);
+        const noteIndex = arrayCopy.findIndex(note => note.id === noteId);
+        arrayCopy[noteIndex].title = newTitle;
+
+        this.setState({
+            notes: arrayCopy
+        })
+    }
+
+    _updateNoteContent = (newContent, noteId) => {
+        const arrayCopy = [...this.state.notes];
+        const noteIndex = arrayCopy.findIndex(note => note.id === noteId);
+        arrayCopy[noteIndex].copy = newContent;
+
+        this.setState({
+            notes: arrayCopy
+        })
+    }
+
 }
 
 export default NotesApp;

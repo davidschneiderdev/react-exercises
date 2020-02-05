@@ -9,7 +9,7 @@ function SearchBar({
             onChange={(event) => {
                 handleChange(event.target.value)
             }}
-            value={text}
+            placeholder="search notes"
         />
     );
 }
