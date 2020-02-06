@@ -47,8 +47,9 @@ class NotesApp extends React.Component {
                 <br />
                 <NoteEditor 
                     note={this._getContentById() || {}}
-                    updateNoteContent={this._updateNoteContent}
-                    updateNoteTitle={this._updateNoteTitle}
+                    handleChange={this._updateNote}
+                    // updateNoteContent={this._updateNoteContent}
+                    // updateNoteTitle={this._updateNoteTitle}
                 />
                 <br />
             </div>
@@ -100,6 +101,17 @@ class NotesApp extends React.Component {
         const arrayCopy = [...this.state.notes];
         const noteIndex = arrayCopy.findIndex(note => note.id === noteId);
         arrayCopy[noteIndex].copy = newContent;
+
+        this.setState({
+            notes: arrayCopy
+        })
+    }
+
+    _updateNote = (note) => {
+        const arrayCopy = [...this.state.notes];
+        const noteIndex = arrayCopy.findIndex(parseNote => parseNote.id === note.id);
+        arrayCopy[noteIndex]= note;
+        console.table(note)
 
         this.setState({
             notes: arrayCopy
