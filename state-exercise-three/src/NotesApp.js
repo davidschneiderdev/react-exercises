@@ -46,7 +46,7 @@ class NotesApp extends React.Component {
                 />
                 <br />
                 <NoteEditor 
-                    noteContent={this._getContentById()}
+                    note={this._getContentById() || {}}
                     updateNoteContent={this._updateNoteContent}
                     updateNoteTitle={this._updateNoteTitle}
                 />
@@ -84,19 +84,10 @@ class NotesApp extends React.Component {
         })
     }
 
-    _getContentById = () => {
-        const filteredArray = this.state.notes.filter(note => {
-
-            const idDoesMatch = note.id.includes(this.state.currentNoteId);
-            return idDoesMatch 
-
-        });
-        return [filteredArray[0].id, filteredArray[0].title,filteredArray[0].copy ];
-    }
+    _getContentById = () => this.state.notes.find(note => note.id === this.state.currentNoteId);
 
     _updateNoteTitle = (newTitle, noteId) => {
         const arrayCopy = [...this.state.notes];
-        // console.log(arrayCopy);
         const noteIndex = arrayCopy.findIndex(note => note.id === noteId);
         arrayCopy[noteIndex].title = newTitle;
 

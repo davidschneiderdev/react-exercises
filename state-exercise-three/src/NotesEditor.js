@@ -1,22 +1,25 @@
 import React from 'react';
 
 function NoteEditor({
-    noteContent,
+    note,
     updateNoteContent,
     updateNoteTitle
 }) {
+
+    console.log({note});
+
     return (
         <div>
             <textarea 
                 onChange={(event) => {
-                    updateNoteTitle(event.target.value, noteContent[0])
+                    updateNoteTitle(event.target.value, note.id)
                 }}
-                value={noteContent[1]}></textarea>
+                value={note.title}></textarea>
             <textarea 
                 onChange={(event) => {
-                    updateNoteContent(event.target.value, noteContent[0])
+                    updateNoteContent(event.target.value, note.id)
                 }}
-                value={noteContent[2]}></textarea>
+                value={note.copy}></textarea>
         </div>
     )
 

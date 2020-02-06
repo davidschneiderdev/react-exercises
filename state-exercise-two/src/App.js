@@ -41,6 +41,8 @@ class App extends React.Component {
           onClick={this._multiply}>*</button>
         <button
           onClick={this._divide}>/</button>
+        <button
+          onClick={this._reset}>Reset</button>
         <output>
           <h1>Output: {this.state.result}</h1>
         </output>
@@ -81,6 +83,14 @@ class App extends React.Component {
     const result = this.state.num1 / this.state.num2
     this.setState({
       result
+    })
+  }
+
+  _reset = () => {
+    this.setState({
+      num1: 0,
+      num2: 0,
+      result: 0
     })
   }
 
